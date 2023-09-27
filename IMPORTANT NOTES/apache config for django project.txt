@@ -1,0 +1,350 @@
+#old config--------------------------------
+
+<VirtualHost *:80>
+ # The ServerName directive sets the request scheme, hostname and port that
+ # the server uses to identify itself. This is used when creating
+ # redirection URLs. In the context of virtual hosts, the ServerName
+ # specifies what hostname must appear in the request's Host: header to
+ # match this virtual host. For the default virtual host (this file) this
+ # value is not decisive as it is used as a last resort host regardless.
+ # However, you must set it for any further virtual host explicitly.
+ #ServerName www.example.com
+
+ServerAdmin webmaster@localhost
+ #DocumentRoot /home/ubuntu/geotab
+        DocumentRoot /home/ubuntu/workspace/geotab
+
+ #Alias /static /home/ubuntu/geotab/static
+        Alias /static /home/ubuntu/workspace/geotab/static
+
+#<Directory /home/ubuntu/geotab/static>
+    <Directory /home/ubuntu/workspace/geotab/static>
+
+Require all granted
+
+</Directory>
+
+
+
+<Directory /home/ubuntu/geotab/mygeotab_project>
+
+<Files wsgi.py>
+
+Require all granted
+
+</Files>
+
+</Directory>
+
+WSGIDaemonProcess geotab python-home=/home/ubuntu/myenv python-path=/home/ubuntu/geotab
+
+WSGIProcessGroup geotab
+
+WSGIScriptAlias / /home/ubuntu/geotab/mygeotab_project/wsgi.py
+
+ # Available loglevels: trace8, ..., trace1, debug, info, notice, warn,
+ # error, crit, alert, emerg.
+ # It is also possible to configure the loglevel for particular
+ # modules, e.g.
+ #LogLevel info ssl:warn
+
+ErrorLog ${APACHE_LOG_DIR}/error.log
+CustomLog ${APACHE_LOG_DIR}/access.log combined
+
+ # For most configuration files from conf-available/, which are
+ # enabled or disabled at a global level, it is possible to
+ # include a line for only one particular virtual host. For example the
+ # following line enables the CGI configuration for this host only
+ # after it has been globally disabled with "a2disconf".
+ #Include conf-available/serve-cgi-bin.conf
+RewriteEngine on
+RewriteCond %{SERVER_NAME} =geotabreports.com
+RewriteRule ^ https://%{SERVER_NAME}%{REQUEST_URI} [END,NE,R=permanent]
+</VirtualHost>
+
+# vim: syntax=apache ts=4 sw=4 sts=4 sr noet
+
+
+#/old config--------------------------------
+
+
+
+
+
+
+
+
+
+#New apache 000.default.config--------------------------------
+
+<VirtualHost *:80>
+ # The ServerName directive sets the request scheme, hostname and port that
+ # the server uses to identify itself. This is used when creating
+ # redirection URLs. In the context of virtual hosts, the ServerName
+ # specifies what hostname must appear in the request's Host: header to
+ # match this virtual host. For the default virtual host (this file) this
+ # value is not decisive as it is used as a last resort host regardless.
+ # However, you must set it for any further virtual host explicitly.
+ #ServerName www.example.com
+
+ServerAdmin webmaster@localhost
+ #DocumentRoot /home/ubuntu/workspace/geotab
+        DocumentRoot /home/ubuntu/workspace/geotab
+
+ #Alias /static /home/ubuntu/workspace/geotab/static
+        Alias /static /home/ubuntu/workspace/geotab/static
+
+#<Directory /home/ubuntu/workspace/geotab/static>
+    <Directory /home/ubuntu/workspace/geotab/static>
+
+Require all granted
+
+</Directory>
+
+
+
+<Directory /home/ubuntu/workspace/geotab/mygeotab_project>
+
+<Files wsgi.py>
+
+Require all granted
+
+</Files>
+
+</Directory>
+
+WSGIDaemonProcess geotab python-home=/home/ubuntu/myenv python-path=/home/ubuntu/workspace/geotab
+
+WSGIProcessGroup geotab
+
+WSGIScriptAlias / /home/ubuntu/workspace/geotab/mygeotab_project/wsgi.py
+
+ # Available loglevels: trace8, ..., trace1, debug, info, notice, warn,
+ # error, crit, alert, emerg.
+ # It is also possible to configure the loglevel for particular
+ # modules, e.g.
+ #LogLevel info ssl:warn
+
+ErrorLog ${APACHE_LOG_DIR}/error.log
+CustomLog ${APACHE_LOG_DIR}/access.log combined
+
+ # For most configuration files from conf-available/, which are
+ # enabled or disabled at a global level, it is possible to
+ # include a line for only one particular virtual host. For example the
+ # following line enables the CGI configuration for this host only
+ # after it has been globally disabled with "a2disconf".
+ #Include conf-available/serve-cgi-bin.conf
+RewriteEngine on
+RewriteCond %{SERVER_NAME} =geotabreports.com
+RewriteRule ^ https://%{SERVER_NAME}%{REQUEST_URI} [END,NE,R=permanent]
+</VirtualHost>
+
+# vim: syntax=apache ts=4 sw=4 sts=4 sr noet
+
+
+#/New apache 000.default.config--------------------------------
+
+
+
+# Stagingui .Env
+
+# -----------------------NEW STAGINGUI CREDENTIALS ----------------------------------
+
+
+SERVER_TYPE = 'STAGING'
+
+MAINTENANCE_MODE= 'OFF'
+
+SECRET_KEY = 'django-insecure-7nahx%v(+p8e6w6cyny1k90=ndh#82+&!kupg$@nn^&&bb-6%c'
+
+DEBUG =  True
+
+ALLOWED_HOSTS = '18.214.198.81,stagingui.geotabreports.com,127.0.0.1,localhost'
+# DATABASE CREDENTIALS ------------------------------------->
+
+# DEFAULT DATABASE--------------------------------->
+
+DATABASES_ENGINE = 'mssql'
+
+DATABASES_HOST = 'database-dev.geotabreports.com'
+
+DATABASES_USER = 'ssingh'
+
+DATABASES_PASSWORD = 'gp$=db=1337'
+
+# / DEFAULT DATABASE--------------------------------->
+
+
+
+# DEUPES DATABASE--------------------------------->
+
+DATABASES_HOST_DJANGO = 'database-dev.geotabreports.com'
+
+DATABASES_USER_DJANGO = 'ssingh'
+
+DATABASES_PASSWORD_DJANGO = 'gp$=db=1337'
+
+# / DEUPES DATABASE--------------------------------->
+
+#/ DATABASE CREDENTIALS ------------------------------------->
+
+
+# NEW ADDED -------------------------------------------->
+
+DATABASES_HOST_DJANGO_NEW = 'database.geotabreports.com'
+
+DATABASES_USER_DJANGO_NEW = 'ssingh'
+
+DATABASES_PASSWORD_DJANGO_NEW = 'shDB1337#!gt'
+
+# / NEW ADDED -------------------------------------------->
+
+
+
+# DATABASE NAMES--------------------->
+
+DATABASES_NAME = 'websitedb'
+
+DATABASES2_NAME = 'geotabadapterdb'
+
+# /DATABASE NAMES--------------------->
+
+
+
+# EMAIL CREDENTIALS--------------------->
+
+EMAIL_HOST = 'email-smtp.us-east-1.amazonaws.com'
+
+EMAIL_HOST_USER_EMAIL = "geotabreport123@gmail.com"
+
+# EMAIL_HOST_USER_EMAIL = "customreports@geotabreports.com"
+
+EMAIL_HOST_USER_EMAIL_PASSWORD = "password@geotabreports.com"
+
+EMAIL_PORT = 465 
+
+EMAIL_HOST_USER = "AKIA6OOMLO6YP7XM4W7Q"
+
+EMAIL_HOST_PASSWORD = "BDHUmupmCr0iFJpG1LCpZ4M/0W4Mt73qyvVb0MUmgU0T"
+
+BCC_EMAIL1 = 'ashish@arivani.net'
+
+BCC_EMAIL2 = 'tmobileincharlotte@gmail.com'
+
+AWS_ACCESS_KEY_ID = 'AKIA6OOMLO6YEDJKSBNU'
+
+AWS_SECRET_ACCESS_KEY = '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'
+
+#/ EMAIL CREDENTIALS--------------------->
+
+
+TOTAL_RULES='6'
+
+RULE_NUMBER_SEQUENCES='1,2,3,4,5,6'
+
+# -----------------------/ NEW STAGINGUI CREDENTIALS ----------------------------------
+
+
+#/ Stagingui .Env
+
+
+# ADDING NEW CONFG==================
+
+ mv 000-default.conf 000-default_old.conf
+
+
+sudo service apache2 restart
+
+
+ mv 000-default_new.conf 000-default.conf
+
+
+
+# /ADDING NEW CONFG========================
+
+
+
+
+# ADDING/REVERTING OLD APACHE CONFG==================
+
+ mv  000-default.conf 000-default_new.conf 
+
+ mv 000-default_old.conf  000-default.conf
+
+# / ADDING/REVERTING OLD APACHE CONFG==================
+
+
+
+
+RUN COMMAND 
+=========== 
+nano /etc/supervisor/conf.d/geotab-celery.conf 
+
+
+; CELERY WORKKER CONFIGURATION  ==================
+
+; ==================================
+
+
+
+;  celery worker supervisor example
+
+
+
+; ==================================
+
+
+
+
+[program:celery]
+
+
+
+; Directory should become before command
+
+
+
+directory=/home/ubuntu/geotab/
+
+
+
+user=nobody
+
+
+numprocs=1
+
+
+
+stdout_logfile=/var/log/celery/worker.log
+
+
+
+stderr_logfile=/var/log/celery/worker.log
+
+
+
+autostart=true
+
+
+
+autorestart=true
+
+
+
+startsecs=10
+
+
+; Set full path to celery program if using virtualenv
+
+; END : OLD CELERY WORKKER CONFIGURATION  ==================
+
+
+
+
+
+
+
+
+
+#new directory added with jenkins in stagingui
+workspace
